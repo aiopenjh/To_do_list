@@ -1,0 +1,233 @@
+<!--
+HTML5 문서임을 브라우저에 알림.
+-->
+<!DOCTYPE html>
+<!--
+문서 전체를 감싸는 요소임. lang은 문서의 언어를 나타내며 현재 값은 영어(en)임.
+-->
+<html lang="en">
+    <!--
+    화면에 직접 표시할 내용이 아니라 문자 인코딩, 화면 설정, 연결 파일 등의 정보를 정의함.
+    -->
+    <head>
+        <!--
+        UTF-8을 사용하여 한글과 특수문자가 올바르게 표시되도록 함.
+        -->
+        <meta charset="UTF-8">
+        <!--
+        모바일 화면의 기준 너비를 기기 너비로 설정함.
+        initial-scale은 초기 배율, minimum/maximum-scale은 확대·축소 범위임.
+        -->
+        <meta name="viewport" content="width=device-width,user-scalable=yes,
+        initial-scale=1.0, minimum-scale=1.0, maximum-scale=2.0">
+        <!--
+        별도 CSS 파일을 연결함. 이 파일의 규칙과 아래 Tailwind 클래스가 함께 스타일을 결정함.
+        -->
+        <link rel="stylesheet" type="text/css" href="css/style.css">
+        <!--
+        할 일 등록·수정·삭제와 localStorage 저장을 담당하는 JS임.
+        JS에서는 DOMContentLoaded 이벤트를 기다린 뒤 입력창과 버튼에 이벤트를 연결함.
+        -->
+        <script src="js/todo.js"></script>
+        <!--
+        Tailwind CSS를 브라우저에서 사용하도록 불러옴.
+        class의 bg-*는 배경색, text-*는 글자색/크기, p-*는 안쪽 여백, m-*는 바깥 여백임.
+        rounded-*는 모서리, border는 테두리, hover:*는 마우스를 올렸을 때의 스타일임.
+        -->
+        <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+        <!--
+        브라우저 탭에 표시되는 제목임.
+        -->
+        <title>Todo 리스트</title>
+    </head>
+    <!--
+    사용자가 실제로 보게 되는 페이지 내용임.
+    -->
+    <body>
+       <!--
+       페이지의 대표 제목임. text-center는 글자를 가로 가운데 정렬함.
+       -->
+       <h1 class="bg-indigo-50 text-indigo-700 px-4 py-2 text-xl text-center mb-4">할 일을 등록하세요</h1> 
+
+       <!--
+       새 할 일을 입력하는 등록 폼임. JS에서 document.forms['frmTodo']로 찾음.
+       method="post"는 기본 제출 방식이지만 JS의 preventDefault()가 기본 제출을 막음.
+       실제 데이터는 서버로 보내지 않고 이 브라우저의 localStorage에 저장함.
+       -->
+       <form name='frmTodo' method="post" class="px-4">
+            <!--
+            날짜 입력 행임. dl은 설명 목록, dt는 항목명, dd는 해당 내용임.
+            flex로 라벨과 입력창을 가로로 배치함. basis-[150px]는 라벨의 기본 너비, grow는 남은 공간 확장임.
+            라벨의 items-center와 justify-center는 각각 세로/가로 가운데 정렬임.
+            -->
+            <dl class="flex mb-1">
+                <dt class="basis-[150px] p-1 bg-indigo-50 text-indigo-700 flex items-center justify-center mr-2 rounded-md">날짜</dt>
+                <dd class="grow">
+                    <!--
+                    날짜 선택 입력창임. name="date"로 JS에서 값을 찾으며 값은 YYYY-MM-DD 형식임.
+                    w-full은 부모 너비 전체, h-11은 높이, focus:*는 입력창을 선택했을 때 적용되는 스타일임.
+                    -->
+                    <input type="date" name="date" placeholder="날짜 입력" 
+                    class="h-11 w-full rounded-lg border border-gray-200
+                   bg-gray-50 px-3 text-gray-900 outline-none
+                   focus:border-indigo-500 focus:ring-2
+                   focus:ring-indigo-100">
+                </dd>
+            </dl>
+            <!--
+            제목 입력 행임. 날짜 행과 같은 방식으로 라벨과 입력창을 배치함.
+            -->
+            <dl class="flex mb-1">
+                <dt class="basis-[150px]  p-1 bg-indigo-50 text-indigo-700 flex items-center justify-center mr-2 rounded-md">제목</dt>
+                <dd class="grow">
+                    <!--
+                    한 줄 제목 입력창임. placeholder는 값이 비어 있을 때 표시할 안내 문구임.
+                    name="title"은 JS의 form.elements.title과 연결됨.
+                    -->
+                    <input type="text" name="title" placeholder="제목 입력" 
+                    class="h-11 w-full rounded-lg border border-gray-200
+                   bg-gray-50 px-3 text-gray-900 outline-none
+                   focus:border-indigo-500 focus:ring-2
+                   focus:ring-indigo-100">
+                </dd>
+            </dl>
+            <!--
+            내용 입력 행임. 아래쪽 여백 mb-4로 제출 버튼과 간격을 둠.
+            -->
+            <dl class="flex mb-4">
+                <dt class="basis-[150px]  p-1 bg-indigo-50 text-indigo-700 flex items-center justify-center mr-2 rounded-md">내용</dt>
+                <dd class="grow">
+                    <!--
+                    여러 줄 내용을 입력함. JS에서 form.elements.content.value로 읽음.
+                    -->
+                    <textarea name="content" placeholder="내용 입력"
+                    class="h-25 w-full rounded-lg border border-gray-200
+                   bg-gray-50 p-4 text-gray-900 outline-none
+                   focus:border-indigo-500 focus:ring-2
+                   focus:ring-indigo-100""></textarea>
+                </dd>
+            </dl>
+            <!--
+            폼 제출 버튼임. 클릭하면 폼의 submit 이벤트가 발생함.
+            w-1/2는 부모 너비의 절반, max-w-xs는 최대 너비 제한, block mx-auto는 가로 가운데 배치임.
+            -->
+            <button type="submit" class="bg-indigo-50 hover:bg-indigo-100 w-1/2 max-w-xs py-2 px-4 
+            rounded-md text-indigo-700 text-lg block mx-auto cursor-pointer">등록하기</button>
+       </form>
+
+       <!--
+       JS가 완성한 li 카드들을 넣는 목록 영역임. id는 getElementById('todo-lists')와 일치해야 함.
+       grid는 격자 배치, md:grid-cols-2는 기본 설정에서 화면 너비 768px 이상일 때 두 열, gap-8은 카드 사이 간격임.
+       -->
+       <ul id="todo-lists" class="m-4 p-4 grid md:grid-cols-2 gap-8">
+
+       </ul>
+
+<!--
+할 일 카드의 HTML 템플릿임. 실행할 JS가 아니며 처음에는 화면에 표시되지 않음.
+todo.getTpl()이 내용을 읽고 render()가 ${uid}, ${date}, ${title}, ${content}를 실제 값으로 바꿈.
+완성된 HTML은 위의 ul에 삽입됨.
+-->
+<script type="text/html" id="tpl">
+    <!--
+    할 일 한 개를 나타내는 카드임. item-${uid}는 항목별 id를 만듦.
+    flex flex-col은 세로 배치, shadow-sm은 그림자, hover:shadow-md는 마우스를 올렸을 때의 그림자임.
+    -->
+    <li
+        id="item-${uid}"
+        class="flex flex-col rounded-xl border border-gray-200
+               bg-white p-5 shadow-sm transition-shadow hover:shadow-md"
+    >
+        <!-- 날짜 -->
+        <div class="mb-3">
+            <!--
+            날짜를 작은 배지처럼 표시함. rounded-full은 둥근 모서리, inline-block은 글자 크기에 맞춘 영역임.
+            -->
+            <span
+                class="inline-block rounded-full bg-indigo-50
+                       px-3 py-1 text-sm font-medium text-indigo-700"
+            >
+                ${date}
+            </span>
+        </div>
+
+        <!-- 제목 -->
+        <!--
+        할 일 제목임. font-bold는 굵은 글자, break-words는 긴 단어의 줄바꿈을 허용함.
+        -->
+        <h3 class="mb-2 text-xl font-bold text-gray-900 break-words">
+            ${title}
+        </h3>
+
+        <!-- 내용: 입력한 줄바꿈 유지 -->
+        <!--
+        할 일 내용임. whitespace-pre-wrap은 입력한 줄바꿈과 공백을 유지하고, leading-7은 줄 간격임.
+        -->
+        <p class="mb-5 whitespace-pre-wrap text-sm leading-7 text-gray-600 break-words">${content}</p>
+
+        <!-- 버튼 -->
+        <!--
+        카드 아래 버튼 영역임. mt-auto로 남는 세로 공간을 채워 버튼을 아래로 밀고, border-t로 윗선을 표시함.
+        -->
+        <div class="mt-auto flex gap-3 border-t border-gray-100 pt-4">
+            <!--
+            삭제 버튼임. type="button"은 폼 제출을 하지 않는 일반 버튼을 뜻함.
+            delete-action은 JS가 삭제 버튼을 구분하는 클래스, data-uid는 삭제할 항목의 식별값임.
+            JS에서는 button.dataset.uid로 읽음. flex-1은 두 버튼이 공간을 나눠 갖도록 함.
+            -->
+            <button
+                type="button"
+                class="delete-action flex-1 rounded-lg bg-red-50
+                       py-2 text-sm font-medium text-red-600
+                       hover:bg-red-100 cursor-pointer"
+                data-uid="${uid}">삭제</button>
+
+            <!--
+            수정 버튼임. edit-action으로 구분하며 data-uid로 수정할 항목을 찾음.
+            클릭하면 기존 데이터를 수정 폼에 채우고 dialog 팝업을 엶.
+            -->
+            <button
+                type="button"
+                class="edit-action flex-1 rounded-lg bg-indigo-50
+                       py-2 text-sm font-medium text-indigo-700
+                       hover:bg-indigo-100 cursor-pointer"
+                data-uid="${uid}">수정</button>
+        </div>
+    </li>
+</script>
+
+       <!--
+       수정용 모달 팝업임. JS의 showModal()로 열고 close()로 닫음.
+       w-[90%]와 max-w-xl은 팝업 너비, backdrop:bg-black/50은 팝업 뒤의 반투명 배경임.
+       -->
+       <dialog
+            id="edit-dialog"
+            class="m-auto w-[90%] max-w-xl rounded-lg p-6 backdrop:bg-black/50">
+            <h2 class="mb-4 text-xl font-bold text-center">할 일 수정</h2>
+
+            <!-- 기존 등록 폼을 복사해 넣을 위치 -->
+            <!--
+            JS가 등록 폼을 cloneNode(true)로 복사하여 넣는 자리임.
+            복사된 폼은 별도의 수정 이벤트를 사용하며 제출 버튼 문구는 수정 저장으로 바뀜.
+            -->
+            <div id="edit-form-area"></div>
+
+            <!--
+            수정 폼과 같은 좌우 여백을 주어 취소 버튼과 수정 저장 버튼의 너비를 맞춤.
+            -->
+            <div class="px-4">
+                <!--
+                취소 버튼임. 입력한 변경 내용을 저장하지 않고 팝업만 닫음.
+                id="cancel-edit"는 JS에서 클릭 이벤트를 연결할 때 사용함.
+                -->
+                <button
+                    type="button"
+                    id="cancel-edit"
+                    class="bg-red-400 hover:bg-black w-1/2 max-w-xs py-2 px-4
+                        rounded-md text-white text-lg block mx-auto mt-4 cursor-pointer">
+                    취소
+                </button>
+            </div>
+        </dialog>
+    </body>
+</html>
