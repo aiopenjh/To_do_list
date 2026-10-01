@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Todo List</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/todo.js" defer></script>
+</head>
+<body class="bg-slate-100 min-h-screen text-slate-900">
+  <main class="mx-auto w-full max-w-xl p-4">
+    <h1 class="mb-4 text-2xl font-bold">Todo List</h1>
+
+    <form id="todo-form" class="mb-4 flex gap-2">
+      <input id="todo-input" type="text" autocomplete="off" placeholder="What needs doing?" aria-label="New todo"
+        class="min-w-0 flex-1 rounded border border-slate-300 bg-white px-3 py-2 focus:border-blue-500 focus:outline-none">
+      <button type="submit" class="shrink-0 rounded bg-blue-600 px-4 py-2 font-medium text-white hover:bg-blue-700">Add</button>
+    </form>
+
+    <ul id="todo-list" class="space-y-2"></ul>
+    <p id="empty-state" class="hidden rounded bg-white p-4 text-center text-slate-500">No todos yet. Add one above.</p>
+  </main>
+</body>
+</html>
