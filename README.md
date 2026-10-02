@@ -49,14 +49,15 @@ To_do_list/
 2026-10-02 기준, 아래 모든 브랜치의 커밋이 `main`에 포함되어 있습니다.
 병합 완료는 실행 테스트 완료를 의미하지 않습니다.
 
-| 작업 폴더 | 브랜치 | main 반영 상태 | 소스 바로가기 |
-| :--- | :--- | :--- | :--- |
-| `cjh/` | `Cjh_TDL` | 병합 완료 (`bb697f7`) | [HTML](./cjh/index.html) |
-| `jsa/` | `feature/jsa` | PR #2 병합 완료 | [HTML](./jsa/index.html) |
-| `sbc/` | `feature/sbc` | PR #1 병합 완료 | [HTML](./sbc/index.html) |
-| `이영민/` | `feature/이영민` | 병합 완료 (`bfc21e4`) | [HTML](./이영민/index.html) |
-| 별도 폴더 없음 | `hakyong` | main에 포함 (`158d8d6`, PR #1 병합 커밋) | — |
+| 팀원명 | 하위 폴더 | 브랜치 | main 반영 상태 | 소스 바로가기 |
+| :--- | :--- | :--- | :--- | :--- |
+| cjh | `cjh/` | `Cjh_TDL` | 병합 완료 (`bb697f7`) | [HTML](./cjh/index.html) |
+| jsa | `jsa/` | `feature/jsa` | PR #2 병합 완료 | [HTML](./jsa/index.html) |
+| sbc | `sbc/` | `feature/sbc` | PR #1 병합 완료 | [HTML](./sbc/index.html) |
+| 이영민 | `이영민/` | `feature/이영민` | 병합 완료 (`bfc21e4`) | [HTML](./이영민/index.html) |
 
+팀원명은 실제 하위 폴더명과 동일하게 표기합니다.
+`hakyong` 브랜치는 별도 하위 폴더가 없으며, PR #1 병합 커밋(`158d8d6`)까지 `main`에 포함되어 있습니다.
 ### PR 현황
 
 - [PR #1: [SBC] Todo List 구현](https://github.com/aiopenjh/To_do_list/pull/1): `feature/sbc` → `main`, 병합 완료
