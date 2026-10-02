@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,user-scalable=yes,
+        initial-scale=1.0, minimum-scale=1.0, maximum-scale=2.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr@4.6.13/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr@4.6.13/dist/flatpickr.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr@4.6.13/dist/l10n/ko.js"></script>
+    <script src="js/todo.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+    <title>Todo 리스트</title>
+    <style>
+        #edit-dialog input,
+        #edit-dialog textarea {
+            background-color: rgba(195, 231, 236, 0.1);
+
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1 class="bg-yellow-50 text-orange-500 px-5 py-2 text-3xl text-center mb-4 tracking-[10px]">
+        할 일을
+        등록하세요</h1>
+
+    <form name='frmTodo' method="post" class="px-4">
+        <dl class="flex mb-3">
+            <dt
+                class="basis-[150px] p-1 bg-yellow-50 text-yellow-700 flex items-center justify-center mr-2 rounded-md border border-orange-200">
+                날짜</dt>
+            <dd class="grow">
+                <input type="date" name="date" placeholder="날짜 입력" class="h-11 w-full rounded-lg border border-orange-200
+                   bg-gray-50 px-3 text-yellow-500 outline-none
+                   focus:border-indigo-500 focus:ring-2
+                   focus:ring-indigo-100">
+            </dd>
+        </dl>
+        <dl class="flex mb-3">
+            <dt
+                class="basis-[150px] p-1 bg-yellow-50 text-yellow-700 flex items-center justify-center mr-2 rounded-md border border-orange-200">
+                제목</dt>
+            <dd class="grow">
+                <input type="text" name="title" placeholder="제목 입력" class="h-11 w-full rounded-lg border border-orange-200
+                   bg-gray-50 px-3 text-yellow-700 outline-none
+                   focus:border-indigo-500 focus:ring-2
+                   focus:ring-indigo-100">
+            </dd>
+        </dl>
+
+        <dl class="flex mb-8">
+            <dt
+                class="basis-[150px] p-1 bg-yellow-50 text-yellow-700 flex items-center justify-center mr-2 rounded-md border border-orange-200">
+                내용</dt>
+            <dd class="grow">
+
+                <textarea name="content" placeholder="내용 입력" class="h-25 w-full rounded-lg border border-orange-200
+                   bg-gray-50 p-4 text-yellow-700 outline-none
+                   focus:border-indigo-500 focus:ring-2
+                   focus:ring-indigo-100 block"></textarea>
+            </dd>
+        </dl>
+
+        <button type="submit"
+            class="bg-yellow-100 hover:bg-yellow-50 w-1/2 max-w-xs py-3 px-2 
+            rounded-md text-yellow-700 text-xl block mx-auto cursor-pointer border-2 border-orange-300 rounded-lg">등록하기</button>
+    </form>
+
+
+    <ul id="todo-lists" class="m-4 p-4 grid grid-cols-3 gap-4">
+
+    </ul>
+
+    <script type="text/html" id="tpl">
+
+    <li
+        id="item-${uid}"
+        class="relative flex flex-col rounded-xl border border-yellow-200
+               bg-yellow-50 p-2 shadow-sm transition-shadow hover:shadow-md"
+    >
+        <div class="mb-2">
+
+            <span
+                class="inline-block rounded-full bg-yellow-100
+                       px-3 py-1 text-sm font-medium text-orange-700"
+            >
+                ${date}
+            </span>
+        </div>
+
+        <h3 class="mb-2 text-xl font-bold text-rose-800 break-words">
+            ${title}
+        </h3>
+
+
+        <p class="mb-5 whitespace-pre-wrap text-sm leading-7 text-amber-700 break-words">${content}</p>
+
+        <div class="mt-auto flex gap-3 border-t border-gray-100 pt-4">
+
+            <button
+                type="button"
+                class="edit-action flex-1 rounded-lg bg-amber-100
+                       py-0.5 text-lg font-medium text-orange-400
+                       hover:bg-amber-300 cursor-pointer"
+                data-uid="${uid}">수정</button>
+
+
+            <button
+                type="button"
+                class="delete-action flex-1 rounded-lg bg-amber-200
+                       py-0.5 text-lg font-medium text-amber-600
+                       hover:bg-amber-300 hover:rounded-lg cursor-pointer"
+                data-uid="${uid}">삭제</button>
+
+          <label class="absolute top-4 right-4 h-6 w-6 cursor-pointer">
+                <input type="checkbox"
+                    class="complete-action peer appearance-none block h-6 w-6 rounded border border-amber-400 bg-amber-100 checked:bg-amber-500 checked:border-amber-600 focus-visible:outline-2 focus-visible:outline-amber-700 cursor-pointer"
+                    data-uid="${uid}"
+                    aria-label="할 일 완료">
+                <span aria-hidden="true"
+                    class="pointer-events-none absolute inset-0 flex items-center justify-center text-2xl font-bold text-red-900 opacity-0 peer-checked:opacity-100">✓</span>
+</label>
+
+
+        </div>
+    </li>
+</script>
+
+    <dialog id="edit-dialog" class="m-auto w-[90%] max-w-xl rounded-lg p-6 bg-yellow-50 backdrop:bg-black/80">
+        <h2 class="mb-4 text-3xl font-bold text-center tracking-[10px] text-orange-300">할 일 수정</h2>
+
+
+        <div id="edit-form-area"></div>
+
+
+        <div class="px-4">
+            <button type="button" id="cancel-edit" class="bg-red-200 hover:bg-amber-300 w-1/2 max-w-xs py-3 px-2
+                        rounded-md text-white text-xl block mx-auto mt-4 cursor-pointer">
+                취소
+            </button>
+        </div>
+    </dialog>
+</body>
+
+</html>
