@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<!-- TODO 프로젝트: HTML은 구조, Tailwind는 디자인, todo.js는 기능 담당! -->
+<html lang="ko">
+    <head>
+        <!-- 브라우저가 한글을 제대로 표시할 수 있도록 문자 인코딩 설정. -->
+        <meta charset="UTF-8">
+        <!-- 모바일 화면에서도 너비가 기기 크기에 맞게 보이도록 설정. -->
+        <meta name="viewport" content="width=device-width,user-scalable=yes, initial-scale=1.0,minimum-scale=1.0,maximum-scale=2.0">
+        <!-- 일반 CSS 파일 연결. 지금은 비어 있고 디자인 대부분은 Tailwind로 처리한다. -->
+        <link rel="stylesheet" type="text/css" href="css/style.css">
+        <!-- Tailwind를 불러오면 class에 bg-*, p-*, flex 같은 디자인 도구를 바로 쓸 수 있다. -->
+        <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+        <!-- 기능을 맡은 JS. head에서 읽지만 JS 안에서 DOMContentLoaded를 기다린다. -->
+        <script src="js/todo.js"></script>
+        <title>TODO 리스트</title>
+    </head>
+    <body>
+        <!-- bg=배경, text=글자, px/py=안쪽 여백, mb=아래쪽 바깥 여백. -->
+        <h1 class="bg-red-900 text-white px-4 py-2 text-xl text-center mb-4">할일을 등록하세요.</h1>
+
+        <!-- 관련 입력값을 하나로 묶는 Form. name은 JS가 Form을 찾을 때 사용한다. -->
+        <form name="frmTodo" method="post" class="px-4">
+            <!-- flex로 항목명과 입력칸을 가로 배치. basis는 왼쪽 기본 너비, grow는 오른쪽 남는 공간 사용. -->
+            <dl class="flex mb-1">
+                <dt class="basis-[150px] p-1 bg-indigo-500 text-center text-white mr-1">날짜</dt>
+                <dd class="grow">
+                    <!-- name="date"이므로 JS에서 frmTodo.date.value로 입력값을 읽는다. -->
+                    <input type="date" name="date" placeholder="날짜 입력" class="border rounded-sm h-10 w-full px-4">
+                </dd>
+            </dl>
+            <dl class="flex mb-1">
+                <dt class="basis-[150px] p-1 bg-indigo-500 text-center text-white mr-1">제목</dt>
+                <dd class="grow">
+                    <!-- text는 한 줄 글자 입력, value로 입력 내용을 가져온다. -->
+                    <input type="text" name="title" placeholder="제목 입력" class="border rounded-sm h-10 w-full px-4">
+                </dd>
+            </dl>
+            <dl class="flex mb-4">
+                <dt class="basis-[150px] p-1 bg-indigo-500 text-center text-white mr-1">내용</dt>
+                <dd class="grow">
+                    <!-- textarea는 여러 줄 입력. h-25는 높이, p-4는 안쪽 여백이다. -->
+                    <textarea name="content" placeholder="내용 입력" class="border rounded-sm h-25 w-full p-4"></textarea>
+                </dd>
+            </dl>
+            <!-- submit을 누르면 Form의 submit 이벤트가 발생한다. hover:는 마우스를 올렸을 때의 디자인. -->
+            <button type="submit" class="bg-blue-300 hover:bg-blue-950 py-2 px-5 rounded-sm text-white text-lg block mx-auto cursor-pointer max-w-xs w-1/2">등록하기</button>
+        </form>
+
+        <!-- 일부러 비워둔 목록. JS render()가 데이터 개수만큼 카드를 만들어 여기 넣는다. -->
+        <!-- grid는 격자 배치, md:grid-cols-2는 중간 크기 이상에서 2열, gap-4는 카드 사이 간격. -->
+        <ul id="todo-items" class="m-4 p-4 grid md:grid-cols-2 gap-4"></ul>
+
+        <!-- 화면에서 바로 실행하는 JS가 아니라, JS가 innerHTML로 읽을 카드 설계도(템플릿). -->
+        <!-- ${...}는 여기서 자동으로 바뀌지 않는다. todo.js의 replace()가 실제 값으로 교체한다. -->
+        <script type="text/html" id="tpl">
+            <!-- uid는 카드 구분용 ID. group은 내부 요소의 group-hover와 연결된다. -->
+            <li id="item-${uid}" class="border border-gray-400 rounded-sm group p-4">
+                <div class="group-hover:shadow-md">[${date}]${title}</div>
+                <div class="">${content}</div>
+                <div class="flex justify-between gap-1">
+                    <!-- data-uid를 JS의 dataset.uid로 읽어서 어떤 카드를 삭제할지 알아낸다. -->
+                    <button type="button" class="delete-action grow py-2 text-white bg-red-400 hover:bg-red-900 cursor-pointer" data-uid="${uid}">삭제</button>
+                    <!-- 주의: 원본에 버튼은 있지만 수정 기능은 아직 JS에 구현되어 있지 않다. -->
+                    <button type="button" class="edit-action grow py-2 text-white bg-indigo-400 hover:bg-indigo-900 cursor-pointer" data-uid="${uid}">수정</button>
+                </div>
+            </li>
+        </script>
+    </body>
+</html>
