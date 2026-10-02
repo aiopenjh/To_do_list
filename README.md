@@ -52,9 +52,9 @@ To_do_list/
 
 | 팀원명 | 하위 폴더 | 브랜치 | main 반영 상태 | 소스 바로가기 |
 | :--- | :--- | :--- | :--- | :--- |
-| cjh | `cjh/` | `Cjh_TDL` | 병합 완료 (`bb697f7`) | [HTML](./cjh/index.html) |
-| jsa | `jsa/` | `feature/jsa` | PR #2 병합 완료 | [HTML](./jsa/index.html) |
-| sbc | `sbc/` | `feature/sbc` | PR #1 병합 완료 | [HTML](./sbc/index.html) |
+| cjh (최지훈) | `cjh/` | `Cjh_TDL` | 병합 완료 (`bb697f7`) | [HTML](./cjh/index.html) |
+| jsa (조성아) | `jsa/` | `feature/jsa` | PR #2 병합 완료 | [HTML](./jsa/index.html) |
+| sbc (선병철) | `sbc/` | `feature/sbc` | PR #1 병합 완료 | [HTML](./sbc/index.html) |
 | lym (이영민) | `lym/` | `feature/이영민` | 병합 완료 (`bfc21e4`) | [HTML](./lym/index.html) |
 | jhy (정학용) | `jhy/` | `hakyong` | 병합 완료 (`851fcb6` 포함) | [HTML](./jhy/index.html) |
 
