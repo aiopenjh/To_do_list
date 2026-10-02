@@ -36,7 +36,8 @@ To_do_list/
 ├── cjh/
 ├── jsa/
 ├── sbc/
-└── 이영민/
+├── lym/
+└── jhy/
 ```
 
 각 개인 폴더에는 `index.html`, `css/style.css`, `js/todo.js`가 있습니다.
@@ -54,10 +55,12 @@ To_do_list/
 | cjh | `cjh/` | `Cjh_TDL` | 병합 완료 (`bb697f7`) | [HTML](./cjh/index.html) |
 | jsa | `jsa/` | `feature/jsa` | PR #2 병합 완료 | [HTML](./jsa/index.html) |
 | sbc | `sbc/` | `feature/sbc` | PR #1 병합 완료 | [HTML](./sbc/index.html) |
-| 이영민 | `이영민/` | `feature/이영민` | 병합 완료 (`bfc21e4`) | [HTML](./이영민/index.html) |
+| lym (이영민) | `lym/` | `feature/이영민` | 병합 완료 (`bfc21e4`) | [HTML](./lym/index.html) |
 
-팀원명은 실제 하위 폴더명과 동일하게 표기합니다.
-`hakyong` 브랜치는 별도 하위 폴더가 없으며, PR #1 병합 커밋(`158d8d6`)까지 `main`에 포함되어 있습니다.
+| jhy (정학용) | `jhy/` | `hakyong` | 병합 완료 (`851fcb6` 포함) | [HTML](./jhy/index.html) |
+
+팀원 식별자는 실제 하위 폴더명과 동일하게 표기합니다.
+정학용님의 학습 정리는 [jhy/study.md](./jhy/study.md)에서 확인할 수 있습니다.
 ### PR 현황
 
 - [PR #1: [SBC] Todo List 구현](https://github.com/aiopenjh/To_do_list/pull/1): `feature/sbc` → `main`, 병합 완료
