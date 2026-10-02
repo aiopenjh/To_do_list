@@ -118,7 +118,7 @@ const todo = {
             targetEl.innerHTML = "<li>오늘 해야 할 일은 무엇인가요?</li>";
             return;
         }
-       
+        
 
         let html = "";
         for (const {uid, date, title, content} of this.items) {
