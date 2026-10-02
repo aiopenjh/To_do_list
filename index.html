@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width,user-scalable=yes, initial-scale=1.0,minimum-scale=1.0,maximum-scale=2.0">
+        <link rel="stylesheet" type="text/css" href="css/style.css">
+        <script type="module" src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+        <script type="module" src="js/todo_refactor.js"></script>
+         <!-- <script type="module" src="js/todo.js"></script> -->
+        <title>TODO 리스트</title>
+    </head>
+    <body>
+        <h1 class="bg-red-900 text-white px-4 py-2 text-xl text-center mb-4">할일을 등록하세요.</h1>
+        <form name="frmTodo" method="post" class="px-4">
+            <dl class="flex mb-1">
+                <dt class="basis-[150px] p-1 bg-indigo-500 text-center text-white mr-1">날짜</dt>
+                <dd class="grow">
+                    <input type="date" name="date" placeholder="날짜 입력" class="border rounded-sm h-10 w-full px-4"> 
+                </dd>
+            </dl>
+            <dl class="flex mb-1">
+                <dt class="basis-[150px] p-1 bg-indigo-500 text-center text-white mr-1">제목</dt>
+                <dd class="grow">
+                    <input type="text" name="title" placeholder="제목 입력" class="border rounded-sm h-10 w-full px-4">
+                </dd>
+            </dl>
+            <dl class="flex mb-4">
+                <dt class="basis-[150px] p-1 bg-indigo-500 text-center text-white mr-1">내용</dt>
+                <dd class="grow">
+                    <textarea name="content" placeholder="내용 입력" class="border rounded-sm h-25 w-full p-4"></textarea>
+                </dd>
+            </dl>
+            <button type="submit" class="bg-blue-300 hover:bg-blue-950 py-2 px-5 rounded-sm text-white text-lg block mx-auto cursor-pointer max-w-xs w-1/2">등록하기</button>
+        </form>
+        
+        <ul id="todo-items" class="m-4 p-4 grid md:grid-cols-2 gap-4"> 
+        </ul>
+
+        <ul id="item-list">
+
+        </ul>"
+
+        <script type="text/html" id="tpl">
+            <li id="item-${uid}" class="border border-gray-400 rounded-sm group p-4">
+                <div class="group-hover:shadow-md">[${date}]${title}</div>
+                <div class="">${content}</div>
+                <div class="flex justify-between gap-1">
+                    <button type="button" class="delete-action grow py-2 text-white bg-red-400 hover:bg-red-900 cursor-pointer" data-uid="${uid}">삭제</button>
+                    <button type="button" class="edit-action grow py-2 text-white bg-indigo-400 hover:bg-indigo-900 cursor-pointer" data-uid="${uid}">수정</button>
+                </div>
+            </li>            
+        </script>
+    </body>
+</html>
