@@ -56,7 +56,6 @@ To_do_list/
 | jsa | `jsa/` | `feature/jsa` | PR #2 병합 완료 | [HTML](./jsa/index.html) |
 | sbc | `sbc/` | `feature/sbc` | PR #1 병합 완료 | [HTML](./sbc/index.html) |
 | lym (이영민) | `lym/` | `feature/이영민` | 병합 완료 (`bfc21e4`) | [HTML](./lym/index.html) |
-
 | jhy (정학용) | `jhy/` | `hakyong` | 병합 완료 (`851fcb6` 포함) | [HTML](./jhy/index.html) |
 
 팀원 식별자는 실제 하위 폴더명과 동일하게 표기합니다.
