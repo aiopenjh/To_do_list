@@ -50,15 +50,15 @@ To_do_list/
 2026-10-02 기준, 아래 모든 브랜치의 커밋이 `main`에 포함되어 있습니다.
 병합 완료는 실행 테스트 완료를 의미하지 않습니다.
 
-| 팀원명 | 하위 폴더 | 브랜치 | main 반영 상태 | 소스 바로가기 |
+| 팀원명 | 하위 폴더 | 작업 브랜치 규칙 | main 반영 상태 | 소스 바로가기 |
 | :--- | :--- | :--- | :--- | :--- |
-| cjh (최지훈) | `cjh/` | `Cjh_TDL` | 병합 완료 (`bb697f7`) | [HTML](./cjh/index.html) |
+| cjh (최지훈) | `cjh/` | `feature/cjh` | 병합 완료 (`bb697f7`) | [HTML](./cjh/index.html) |
 | jsa (조성아) | `jsa/` | `feature/jsa` | PR #2 병합 완료 | [HTML](./jsa/index.html) |
 | sbc (선병철) | `sbc/` | `feature/sbc` | PR #1 병합 완료 | [HTML](./sbc/index.html) |
-| lym (이영민) | `lym/` | `feature/이영민` | 병합 완료 (`bfc21e4`) | [HTML](./lym/index.html) |
-| jhy (정학용) | `jhy/` | `hakyong` | 병합 완료 (`851fcb6` 포함) | [HTML](./jhy/index.html) |
+| lym (이영민) | `lym/` | `feature/lym` | 병합 완료 (`bfc21e4`) | [HTML](./lym/index.html) |
+| jhy (정학용) | `jhy/` | `feature/jhy` | 병합 완료 (`851fcb6` 포함) | [HTML](./jhy/index.html) |
 
-팀원 식별자는 실제 하위 폴더명과 동일하게 표기합니다.
+팀원 식별자는 실제 하위 폴더명과 동일하게 표기하며, 작업 브랜치는 `feature/이니셜` 형식으로 통일합니다. 기존 작업 브랜치는 병합 후 삭제되었으며, 위 표의 브랜치명은 앞으로 사용할 이름입니다.
 정학용님의 학습 정리는 [jhy/study.md](./jhy/study.md)에서 확인할 수 있습니다.
 ### PR 현황
 
@@ -94,11 +94,11 @@ cd To_do_list
 
 ### 브랜치 생성 및 작업
 ```bash
-# 본인 이름의 브랜치 생성 후 이동
-git checkout -b feature/[본인이름]
+# 본인 이니셜의 브랜치 생성 후 이동
+git checkout -b feature/[본인이니셜]
 
 # 작업 완료 후 커밋 & 푸시
 git add .
 git commit -m "feat: [본인이름] Todo List 구현"
-git push origin feature/[본인이름]
+git push origin feature/[본인이니셜]
 ```
